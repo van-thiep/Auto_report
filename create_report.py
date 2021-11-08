@@ -92,7 +92,7 @@ def create_bm6a(bm6a_base):
              r = para.add_run().add_picture(f'{list_chart[chart_index]}.png',
                                             width = Inches(7) , height=Inches(3))
              para = para.insert_paragraph_before(f'{list_chart[chart_index]}',style= None)
-           para.insert_paragraph_before('Kết quả mô hình', style='Heading 1')
+           para.insert_paragraph_before('3 Kết quả mô hình', style='Heading 1')
            bm6a_base.save('BM6a.docx')
            break
 #create_bm6a(bm6a_base)
