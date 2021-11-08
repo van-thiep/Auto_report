@@ -7,6 +7,7 @@ Original file is located at
 """
 
 import json
+import os
 import streamlit as st
 from zipfile import ZipFile
 from io import BytesIO
@@ -114,7 +115,10 @@ def create_slide_kq():
                                         width = Inches(6))
     X.save('Slide_KQ.pptx')
 
-
+def save_uploadedfile(uploadedfile):
+     with open(os.path.join("tempDir",uploadedfile.name),"wb") as f:
+         f.write(uploadedfile.getbuffer())
+        
 def download_all_file(list_file: list):
     '''
     Zip all file then create link for downloading
@@ -134,13 +138,15 @@ def download_all_file(list_file: list):
         </a>"
     st.sidebar.markdown(href, unsafe_allow_html=True)
 
-# Upload  output file of AutoML notebook
+# Upload and save output file of AutoML notebook
 file_upload = st.sidebar.file_uploader("Upload AutoML file", type=["json"])
+save_uploadedfile(file_upload)
+
 if file_upload is not None:
     AUTOML_OUTPUT_FILE_PATH = file_upload.name
 
     # Get image from notebook output
-    content = json.loads(codecs.open(file_upload,'r','utf-8-sig').read())
+    content = json.loads(codecs.open(AUTOML_OUTPUT_FILE_PATH,'r','utf-8-sig').read())
     list_imgs = content['paragraphs'][4]['results']['msg']
     chart_index = 0
     for img in list_imgs:
