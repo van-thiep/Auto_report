@@ -116,7 +116,7 @@ def create_slide_kq():
     X.save('Slide_KQ.pptx')
 
 def save_uploadedfile(uploadedfile):
-     with open(os.path.join("tempDir",uploadedfile.name),"wb") as f:
+     with open("autoML_output.json","wb") as f:
          f.write(uploadedfile.getbuffer())
         
 def download_all_file(list_file: list):
@@ -145,7 +145,7 @@ if file_upload is not None:
     AUTOML_OUTPUT_FILE_PATH = file_upload.name
     save_uploadedfile(file_upload)
     # Get image from notebook output
-    content = json.loads(codecs.open(AUTOML_OUTPUT_FILE_PATH,'r','utf-8-sig').read())
+    content = json.loads(codecs.open("autoML_output.json",'r','utf-8-sig').read())
     list_imgs = content['paragraphs'][4]['results']['msg']
     chart_index = 0
     for img in list_imgs:
