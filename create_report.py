@@ -116,6 +116,9 @@ def create_slide_kq():
     X.save('Slide_KQ.pptx')
 
 def save_uploadedfile(uploadedfile):
+    """
+    Save streamlit upload file
+    """
      with open("autoML_output.json","wb") as f:
          f.write(uploadedfile.getbuffer())
         
@@ -142,7 +145,6 @@ def download_all_file(list_file: list):
 file_upload = st.sidebar.file_uploader("Upload AutoML file", type=["json"])
 
 if file_upload is not None:
-    AUTOML_OUTPUT_FILE_PATH = file_upload.name
     save_uploadedfile(file_upload)
     # Get image from notebook output
     content = json.loads(codecs.open("autoML_output.json",'r','utf-8-sig').read())
