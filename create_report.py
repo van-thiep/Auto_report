@@ -119,8 +119,8 @@ def save_uploadedfile(uploadedfile):
     """
     Save streamlit upload file
     """
-     with open("autoML_output.json","wb") as f:
-         f.write(uploadedfile.getbuffer())
+    with open("autoML_output.json","wb") as f:
+        f.write(uploadedfile.getbuffer())
         
 def download_all_file(list_file: list):
     '''
